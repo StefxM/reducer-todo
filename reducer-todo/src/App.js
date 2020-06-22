@@ -9,9 +9,9 @@ import { initialState, todoReducer } from "./reducers/reducer";
 function App() {
   
   const [state, dispatch] = useReducer(todoReducer, initialState); 
-
-    addTodo = (e, todo) => {
-      e.preventDefault();
+    console.log(state)
+    const addTodo = (todo) => {
+     
       //replacing old code with reducer terms
      dispatch({
        type:"ADD_TODO",
@@ -19,14 +19,14 @@ function App() {
      })
     };
 
-    toggleTodo = todoId => {
+    const toggleTodo = todoId => {
      dispatch({
        type:"TOGGLE_COMPLETED",
        payload: todoId
      })
     };
-    clearCompleted = e => {
-      e.preventDefault();
+    const clearCompleted = () => {
+     
       dispatch({
         type: "CLEAR_COMPLETED"
 
@@ -37,12 +37,14 @@ function App() {
     return (
       <div className="App">
         <div className="header">
+         
           <h1>Welcome to T0D0</h1>
+         
           <TodoForm addTodo={addTodo}
           />
       </div>
       <TodoList
-        todoTasks={state.todoTasks}
+        todos={state}
         toggleTodo={toggleTodo}
         clearCompleted={clearCompleted}
         />

@@ -34,40 +34,39 @@ const TodoForm = () => {
 
 export default TodoForm;*/
 
-import React, {useState, useReducer} from "react"; 
+import React, {useState} from "react"; 
 //import "./Todo.css";
 
 
-function TodoForm() {
+function TodoForm(props) {
 
 const [todo, setTodo] = useState("");
-const [state, dispatch] = useReducer() 
 
 
 
-    handleChanges = e => {
-        this.setState({ [e.target.name]: e.target.value });
+
+    const handleChanges = e => {
+        setTodo(e.target.value);
     };
 
-    submitTodo = e => {
+    const submitTodo = e => {
         e.preventDefault();
-        this.setState({ todo:'' });
-        this.props.addTodo(e, this.state.todo);
+        props.addTodo(todo);
+        setTodo({ todo:'' });
     };
 
-    render(){
-        console.log("rendering form");
+  
         return(
-            <form onSubmit={this.submitTodo}>
+            <form onSubmit={submitTodo}>
                 <input
                     type="text"
-                    value={this.state.todo}
+                    value={todo}
                     name="todo"
-                    onChange={this.handleChanges}/>
+                    onChange={handleChanges}/>
                 <button>Add</button>
             </form>
         );
-    }
+    
 }
 
 export default TodoForm;
